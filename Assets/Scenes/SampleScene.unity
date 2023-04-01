@@ -212,8 +212,8 @@ HingeJoint2D:
     m_MaximumMotorForce: 10000
   m_UseLimits: 0
   m_AngleLimits:
-    m_LowerAngle: 0
-    m_UpperAngle: 359
+    m_LowerAngle: 90
+    m_UpperAngle: -90
 --- !u!212 &161475391
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1155,8 +1155,8 @@ HingeJoint2D:
     m_MaximumMotorForce: 10000
   m_UseLimits: 0
   m_AngleLimits:
-    m_LowerAngle: 0
-    m_UpperAngle: 359
+    m_LowerAngle: 90
+    m_UpperAngle: -90
 --- !u!212 &888390165
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1566,6 +1566,9 @@ MonoBehaviour:
   speed: 0.5
   maxSpeed: 10
   rb: {fileID: 1780671376}
+  armRb: {fileID: 2075432815}
+  upperArmRb: {fileID: 161475388}
+  cam: {fileID: 829312540}
 --- !u!95 &1365768430
 Animator:
   serializedVersion: 4
@@ -1600,7 +1603,7 @@ GameObject:
   - component: {fileID: 1708059788}
   - component: {fileID: 1708059787}
   m_Layer: 6
-  m_Name: Hand (1)
+  m_Name: Arm (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1669,8 +1672,8 @@ HingeJoint2D:
     m_MaximumMotorForce: 10000
   m_UseLimits: 0
   m_AngleLimits:
-    m_LowerAngle: 0
-    m_UpperAngle: 359
+    m_LowerAngle: 90
+    m_UpperAngle: -90
 --- !u!50 &1708059789
 Rigidbody2D:
   serializedVersion: 4
@@ -1906,7 +1909,7 @@ GameObject:
   - component: {fileID: 2075432814}
   - component: {fileID: 2075432813}
   m_Layer: 6
-  m_Name: Hand
+  m_Name: Arm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1975,8 +1978,8 @@ HingeJoint2D:
     m_MaximumMotorForce: 10000
   m_UseLimits: 0
   m_AngleLimits:
-    m_LowerAngle: 0
-    m_UpperAngle: 359
+    m_LowerAngle: 90
+    m_UpperAngle: -90
 --- !u!50 &2075432815
 Rigidbody2D:
   serializedVersion: 4

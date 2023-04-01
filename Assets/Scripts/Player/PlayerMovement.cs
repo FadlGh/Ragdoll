@@ -10,6 +10,9 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Components")]
     public Rigidbody2D rb;
+    public Rigidbody2D armRb;
+    public Rigidbody2D upperArmRb;
+    public Camera cam;
 
     private float horizontal;
     private Animator am;
@@ -24,9 +27,20 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         horizontal = Input.GetAxisRaw("Horizontal");
+
         if (horizontal > 0) am.Play("Right Walk");
         if (horizontal < 0) am.Play("Left Walk");
         if (horizontal == 0) am.Play("Idle");
+
+        Vector3 mousePos = new Vector3(cam.ScreenToWorldPoint(Input.mousePosition).x, cam.ScreenToWorldPoint(Input.mousePosition).y, 0);
+        Vector3 difference = mousePos - transform.position;
+        float rotationZ = Mathf.Atan2(difference.x, -difference.y) * Mathf.Rad2Deg;
+
+        if (Input.GetMouseButton(0))
+        {
+            armRb.MoveRotation(Mathf.LerpAngle(rb.rotation, rotationZ, 100 * Time.fixedDeltaTime));
+            upperArmRb.MoveRotation(Mathf.LerpAngle(rb.rotation, rotationZ, 100 * Time.fixedDeltaTime));
+        }
     }
 
     void FixedUpdate()
