@@ -27,10 +27,7 @@ public class Grab : MonoBehaviour
             FixedJoint2D[] joints = currentlyHolding.GetComponents<FixedJoint2D>();
             for (int i = 0; i < joints.Length; i++)
             {
-                if (joints[i].connectedBody == hand)
-                {
-                    Destroy(joints[i]);
-                }
+                Destroy(joints[i]);
             }
 
             joint = null;

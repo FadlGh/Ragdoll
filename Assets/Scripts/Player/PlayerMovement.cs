@@ -7,15 +7,20 @@ public class PlayerMovement : MonoBehaviour
     [Header("Speeds")]
     public float speed;
     public float maxSpeed;
+    public float jumpPower;
 
     [Header("Components")]
     public Rigidbody2D rb;
     public Rigidbody2D armRb;
     public Rigidbody2D upperArmRb;
     public Camera cam;
+    public Animator am;
+
+    [Header("Grounded Settings")]
+    public Transform groundCheck;
+    public LayerMask groundLayer;
 
     private float horizontal;
-    private Animator am;
 
     // Start is called before the first frame update
     void Start()
@@ -41,6 +46,11 @@ public class PlayerMovement : MonoBehaviour
             armRb.MoveRotation(Mathf.LerpAngle(rb.rotation, rotationZ, 100 * Time.fixedDeltaTime));
             upperArmRb.MoveRotation(Mathf.LerpAngle(rb.rotation, rotationZ, 100 * Time.fixedDeltaTime));
         }
+        if (Input.GetButtonDown("Jump") & isGrounded())
+        {
+            rb.AddForce(Vector2.up * jumpPower);
+        }
+
     }
 
     void FixedUpdate()
@@ -50,6 +60,16 @@ public class PlayerMovement : MonoBehaviour
             rb.velocity = Vector2.ClampMagnitude(rb.velocity, maxSpeed);
         }
         rb.AddForce(Vector2.right * speed * horizontal, ForceMode2D.Impulse);
-        rb.AddForce(Vector2.up * -Mathf.Abs(horizontal) / 8, ForceMode2D.Impulse);
+    }
+
+    private bool isGrounded()
+    {
+        return Physics2D.OverlapCircle(groundCheck.position, 0.5f, groundLayer);
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(groundCheck.position, 0.5f);
     }
 }
