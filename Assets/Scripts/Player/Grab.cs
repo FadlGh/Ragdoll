@@ -1,4 +1,3 @@
-
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -37,7 +36,8 @@ public class Grab : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D col)
     {
-        if (canGrab && col.gameObject.GetComponent<Rigidbody2D>() != null)
+
+        if (canGrab && currentlyHolding == null && col.gameObject.GetComponent<Rigidbody2D>() != null)
         {
             currentlyHolding = col.gameObject;
             joint = currentlyHolding.AddComponent<FixedJoint2D>();
