@@ -4,44 +4,44 @@ using UnityEngine;
 
 public class Grab : MonoBehaviour
 {
-    public Rigidbody2D hand;
+    [SerializeField] Rigidbody2D hand;
 
-    private GameObject currentlyHolding;
-    private bool canGrab;
-    private FixedJoint2D joint;
+    private GameObject _currentlyHolding;
+    private bool _canGrab;
+    private FixedJoint2D _joint;
 
     private void Update()
     {
         if (Input.GetMouseButton(0))
         {
-            canGrab = true;
+            _canGrab = true;
         }
         else
         {
-            canGrab = false;
+            _canGrab = false;
         }
 
-        if (!canGrab && currentlyHolding != null)
+        if (!_canGrab && _currentlyHolding != null)
         {
-            FixedJoint2D[] joints = currentlyHolding.GetComponents<FixedJoint2D>();
+            FixedJoint2D[] joints = _currentlyHolding.GetComponents<FixedJoint2D>();
             for (int i = 0; i < joints.Length; i++)
             {
                 Destroy(joints[i]);
             }
 
-            joint = null;
-            currentlyHolding = null;
+            _joint = null;
+            _currentlyHolding = null;
         }
     }
 
     private void OnTriggerEnter2D(Collider2D col)
     {
 
-        if (canGrab && currentlyHolding == null && col.gameObject.GetComponent<Rigidbody2D>() != null)
+        if (_canGrab && _currentlyHolding == null && col.gameObject.GetComponent<Rigidbody2D>() != null)
         {
-            currentlyHolding = col.gameObject;
-            joint = currentlyHolding.AddComponent<FixedJoint2D>();
-            joint.connectedBody = hand;
+            _currentlyHolding = col.gameObject;
+            _joint = _currentlyHolding.AddComponent<FixedJoint2D>();
+            _joint.connectedBody = hand;
         }
     }
 }

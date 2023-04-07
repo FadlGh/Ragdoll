@@ -41,11 +41,11 @@ public class PlayerMovement : MonoBehaviour
         Vector3 difference = mousePos - transform.position;
         float rotationZ = Mathf.Atan2(difference.x, -difference.y) * Mathf.Rad2Deg;
 
-        if (Input.GetMouseButton(0))
-        {
-            armRb.MoveRotation(Mathf.LerpAngle(rb.rotation, rotationZ, 100 * Time.fixedDeltaTime));
-            upperArmRb.MoveRotation(Mathf.LerpAngle(rb.rotation, rotationZ, 100 * Time.fixedDeltaTime));
-        }
+
+      
+         armRb.MoveRotation(Mathf.LerpAngle(rb.rotation, rotationZ, 100 * Time.fixedDeltaTime));
+         upperArmRb.MoveRotation(Mathf.LerpAngle(rb.rotation, rotationZ, 100 * Time.fixedDeltaTime));
+   
         if (Input.GetButtonDown("Jump") & isGrounded())
         {
             rb.AddForce(Vector2.up * jumpPower);
